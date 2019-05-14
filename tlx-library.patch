@@ -1,0 +1,13 @@
+--- tlx-92ba24ac3822db2f40d914f9c9b01636dcefec89/tlx/CMakeLists.txt.orig	2019-05-02 17:46:00.000000000 +0200
++++ tlx-92ba24ac3822db2f40d914f9c9b01636dcefec89/tlx/CMakeLists.txt	2019-05-14 18:24:00.525522053 +0200
+@@ -59,10 +59,7 @@
+ set(TLX_EXPORTED_LIBS tlx)
+ 
+ # we name debug library builds "tlx_debug" and release builds "tlx"
+-string(TOLOWER "tlx_${CMAKE_BUILD_TYPE}" TLX_LIBNAME)
+-if(TLX_LIBNAME STREQUAL "tlx_release" OR TLX_LIBNAME STREQUAL "tlx_")
+   set(TLX_LIBNAME "tlx")
+-endif()
+ 
+ if(TLX_BUILD_SHARED_LIBS)
+ 
