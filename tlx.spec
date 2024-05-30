@@ -5,16 +5,13 @@
 Summary:	Collection of C++ Data Structures, Algorithms, and Miscellaneous Helpers
 Summary(pl.UTF-8):	Zbiór struktur danych, algorytmów i klas pomocniczych dla C++
 Name:		tlx
-# CMakeLists.txt /TLX_VERSION
-Version:	0.1.0
-%define	gitref	92ba24ac3822db2f40d914f9c9b01636dcefec89
-%define	snap	20190503
+Version:	0.6.1
 Release:	1
 License:	Boost v1.0
 Group:		Libraries
 #Source0Download: https://github.com/tlx/tlx/releases
-Source0:	https://github.com/tlx/tlx/archive/%{gitref}/%{name}-%{snap}.tar.gz
-# Source0-md5:	161a4a59bb20592ee9a9cbb1c3af39e9
+Source0:	https://github.com/tlx/tlx/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	3d92269e11e6f3c901df8f92152988d9
 Patch0:		%{name}-library.patch
 URL:		http://panthema.net/2018/0528-tlx-library/
 BuildRequires:	cmake >= 2.8.12
@@ -75,7 +72,7 @@ Static tlx library.
 Statyczna biblioteka tlx.
 
 %prep
-%setup -q -n %{name}-%{gitref}
+%setup -q
 %patch0 -p1
 
 %build
@@ -95,9 +92,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# disable completeness check incompatible with split packaging
-%{__sed} -i -e '/^foreach(target .*IMPORT_CHECK_TARGETS/,/^endforeach/d; /^unset(_IMPORT_CHECK_TARGETS)/d' $RPM_BUILD_ROOT%{_libdir}/cmake/tlx/tlx-targets.cmake
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -107,7 +101,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS LICENSE README.md
-%attr(755,root,root) %{_libdir}/libtlx.so.%{version}
+%attr(755,root,root) %{_libdir}/libtlx.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtlx.so.0.6
 
 %files devel
 %defattr(644,root,root,755)
